@@ -1,0 +1,11 @@
+{
+  "name": "store",
+  "version": "0.0.1",
+  "authors": [
+    "Anthony Cabrera <anthonyka7@gmail.com>"
+  ],
+  "description": "School stores web app",
+  "main": "server.js",
+  "license": "MIT",
+  "private": true
+}
