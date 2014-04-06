@@ -39,7 +39,7 @@ module.exports = function(app, config) {
 
     // Persist sessions with mongoStore
     app.use(express.session({
-      secret: 'Anthony Cabrera secret code for the page!',
+      secret: 'secret',
       store: new mongoStore({
         url: config.db.url,
         collection: 'sessions'

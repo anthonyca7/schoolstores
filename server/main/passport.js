@@ -1,8 +1,8 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    User = mongoose.model('User'),
-    passport = require('passport'),
+var mongoose      = require('mongoose'),
+    User          = mongoose.model('User'),
+    passport      = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 
 /**
@@ -20,19 +20,16 @@ passport.deserializeUser(function(id, done) {
 });
 
 // add other strategies for more authentication flexibility
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password' // this is the virtual field on the model
-  },
-  function(email, password, done) {
+passport.use(new LocalStrategy(
+  function(username, password, done) {
     User.findOne({
-      email: email
+      username: username
     }, function(err, user) {
       if (err) return done(err);
       
       if (!user) {
         return done(null, false, {
-          message: 'This email is not registered.'
+          message: 'This username is not registered.'
         });
       }
       if (!user.authenticate(password)) {
