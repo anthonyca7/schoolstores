@@ -17,7 +17,6 @@ angular.module('schoolstore')
           username: $scope.user.username
         })
         .then( function() {
-          // Account created, redirect to home
           $location.path('/');
         })
         .catch( function(err) {

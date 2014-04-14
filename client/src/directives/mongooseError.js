@@ -14,5 +14,5 @@ angular.module('fullstackApp')
           return ngModel.$setValidity('mongoose', true);
         });
       }
-    };
+    }
   });

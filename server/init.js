@@ -12,7 +12,7 @@ User.find({}).remove(function() {
        password: "anthony"
    },
    function() {
-      console.log('finished populating users');
+      console.log('Finished initializing user table');
     }
   );
 });

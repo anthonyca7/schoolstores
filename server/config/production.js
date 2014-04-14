@@ -21,7 +21,7 @@ module.exports = {
   root:        rootDir,
   port:        process.env.PORT || 3000,
   db:{
-    url: "localhost:27017",
+    url: "mongodb://localhost:27017/store",
     options:{
       db: {
         safe: true

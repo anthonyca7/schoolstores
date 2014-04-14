@@ -1,28 +1,26 @@
 module.exports = function(grunt) {
+  require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
     protractor: {
-    options: {
-      configFile: "conf.js", // Default config file
-      keepAlive: true, // If false, the grunt process stops when the test fails.
-      noColor: false, // If true, protractor will not use colors in its output.
-      args: {
-        'browser': 'chrome'
-      }
+      options: {
+        configFile: "conf.js", // Default config file
+        keepAlive: true, // If false, the grunt process stops when the test fails.
+        noColor: false, // If true, protractor will not use colors in its output.
+        args: {
+          'browser': 'chrome'
+        }
+      },
     },
-  },
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec',
+        },
+        src: ['test/server/**/*.spec.js']
+      }
+    }
   });
-
-  // Load the plugin that provides the "uglify" task.
-  // grunt.loadNpmTasks('grunt-contrib-uglify');
-
-  // Default task(s).
-  // grunt.registerTask('default', ['uglify']);
-
-
-  grunt.loadNpmTasks('grunt-protractor-runner');
-
-
 
   grunt.registerTask('test', ['protractor']);
 

@@ -11,9 +11,12 @@ var UserSchema = new Schema({
   name: String,
   username: {
     type: String,
-    default: 'noUsername'
+    match: /^[a-zA-Z][a-zA-Z0-9\-\_]+$/,
   },
-  email: String,
+  email: {
+    type: String,
+    match: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+  },
   hashedPassword: String,
   salt: String
 });
@@ -37,6 +40,7 @@ UserSchema
   .virtual('userInfo')
   .get(function() {
     return {
+      'id': this.id,
       'username': this.username,
       'name': this.name,
     };
@@ -60,14 +64,14 @@ UserSchema
 UserSchema
   .path('email')
   .validate(function(email) {
-    return email.length;
+    return email.length >= 8 && email.length <= 50;
   }, 'Email cannot be blank');
 
 // Validate empty username
 UserSchema
   .path('username')
   .validate(function(username) {
-    return username.length;
+    return username.length >= 5 && username.length <= 25;
   }, 'Username cannot be blank');
 
 // Validate empty password
@@ -93,7 +97,7 @@ UserSchema
 }, 'The specified email address is already in use.');
 
 // Validate email is not taken
-UserSchema
+/*UserSchema
   .path('username')
   .validate(function(value, respond) {
     var self = this;
@@ -105,7 +109,7 @@ UserSchema
       }
       respond(true);
     });
-}, 'The specified username is already in use.');
+}, 'The specified username is already in use.');*/
 
 var validatePresenceOf = function(value) {
   return value && value.length;

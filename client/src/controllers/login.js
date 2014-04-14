@@ -14,7 +14,6 @@ angular.module('schoolstore')
           password: $scope.user.password
         })
         .then( function() {
-          // Logged in, redirect to home
           $location.path('/');
         })
         .catch( function(err) {

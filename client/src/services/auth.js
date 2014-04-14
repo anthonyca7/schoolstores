@@ -28,7 +28,6 @@ angular.module('schoolstore')
       logout: function(callback) {
         var cb = callback || angular.noop;
 
-        console.log('logging user out');
         return Session.delete(function() {
             $rootScope.currentUser = null;
             return cb();

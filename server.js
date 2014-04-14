@@ -15,7 +15,7 @@ fs.readdirSync(modelsPath).forEach(function (model) {
   require(modelsPath + '/' + model);
 });
 
-require(config.controllers + '/core/init');
+require(config.serverDir + '/init');
 
 require(config.mainDir + '/passport');
 var app = express();
@@ -29,4 +29,4 @@ app.listen(config.port, function () {
 });
 
 
-module.exports = app;
+exports = module.exports = app;

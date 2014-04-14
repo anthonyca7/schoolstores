@@ -13,7 +13,6 @@ exports.create = function (req, res, next) {
     
     req.logIn(newUser, function(err) {
       if (err) return next(err);
-
       return res.json(req.user.userInfo);
     });
   });
@@ -21,14 +20,7 @@ exports.create = function (req, res, next) {
 
 //profile
 exports.show = function (req, res, next) {
-  var userId = req.params.id;
-
-  User.findById(userId, function (err, user) {
-    if (err) return next(err);
-    if (!user) return res.send(404);
-
-    res.send({ profile: user.profile });
-  });
+	res.json(req.userRequested.profile);
 };
 
 
@@ -55,3 +47,24 @@ exports.changePassword = function(req, res, next) {
 exports.me = function(req, res) {
   res.json(req.user || null);
 };
+
+//loads user parameter
+exports.loadByUsername = function (req, res, next, username) {
+	User.findOne({username: username}, function (err, user) {
+    	if (err) return next(err);
+    	if (!user) return res.send(404);
+    	else{
+	    	req.userRequested = user;
+	    	return next();
+		}
+  	});
+};
+
+exports.loadByUserId = function (req, res, next, userId) {
+	User.findById(userId, function (err, user) {
+		if (err) return next(err);
+		if (!user) return res.send(404);
+		req.userRequested = user;
+		return next();
+	});
+}
