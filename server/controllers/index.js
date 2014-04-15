@@ -4,11 +4,11 @@ var path = require('path');
 
 exports.partials = function(req, res) {
   var loc = req.url.split('.')[0];
-  var requestedView = path.join("./"+loc);
+  var requestedView = path.join('./'+loc);
 
   res.render(requestedView, function(err, html) {
     if(err) {
-      console.log("Error rendering partial '" + requestedView + "'\n", err);
+      console.log('Error rendering partial \'' + requestedView + '\'\n', err);
       res.status(404);
       res.send(404);
     } else {

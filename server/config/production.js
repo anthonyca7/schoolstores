@@ -1,3 +1,5 @@
+'use strict';
+
 var path         = require('path');
 var serverDir    = path.normalize(__dirname + '/..');
 var mainDir      = path.normalize(__dirname + '/../main');
@@ -6,7 +8,6 @@ var configDir    = path.normalize(__dirname);
 var views        = path.normalize(serverDir + '/views');
 var controllers  = path.normalize(serverDir + '/controllers');
 var models       = path.normalize(serverDir + '/models');
-var main         = path.normalize(serverDir + '/main');
 var client       = path.normalize(rootDir   + '/client');
 
 module.exports = {
@@ -21,11 +22,11 @@ module.exports = {
   root:        rootDir,
   port:        process.env.PORT || 3000,
   db:{
-    url: "mongodb://localhost:27017/store",
+    url: 'mongodb://localhost:27017/store',
     options:{
       db: {
         safe: true
       }
     }
   }
-}
+};

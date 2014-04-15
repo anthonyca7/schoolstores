@@ -8,7 +8,7 @@ var core       = require('./controllers'),
 
 module.exports = function(app) {  
   app.param('username', users.loadByUsername);
-  app.param('userId', users.loadByUserId)
+  app.param('userId', users.loadByUserId);
   app.post('/api/users', users.create);
   app.put('/api/users', users.changePassword);
   app.get('/api/users/me', users.me);
@@ -24,4 +24,4 @@ module.exports = function(app) {
   
   app.get('/partials/*', core.partials);
   app.get('/*', middleware.setUserCookie, core.index); 
-}
+};

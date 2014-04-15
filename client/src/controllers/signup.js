@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('schoolstore')
-  .controller('SignupCtrl', ['$scope', '$location', 'Auth',
+  .controller('SignupController', ['$scope', '$location', 'Auth',
     function ($scope, $location, Auth) {
     $scope.user = {};
     $scope.errors = {};

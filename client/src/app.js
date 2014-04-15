@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('schoolstore', [
 	'ngCookies',
 	'ngResource', 
@@ -13,12 +15,15 @@ angular.module('schoolstore', [
 			})
 			.when('/signup',{
 				templateUrl: 'partials/signup',
-				controller: 'SignupCtrl'
+				controller: 'SignupController'
 			})
 			.when('/login', {
 				templateUrl: 'partials/login',
-				controller: 'LoginCtrl'
-			});
+				controller: 'LoginController'
+			})
+			.otherwise({
+		    	redirectTo: '/'
+		    });
 
 			$locationProvider.html5Mode(true);
 	}])
@@ -27,11 +32,9 @@ angular.module('schoolstore', [
 		'$location', 
 		'Auth',
 		function ($rootScope, $location, Auth) {
-
-	    $rootScope.$on('$routeChangeStart', function (event, next) {
-	      
-	      if (next.authenticate && !Auth.isLoggedIn()) {
-	        $location.path('/login');
-	      }
-	    });
+		    $rootScope.$on('$routeChangeStart', function (event, next) {
+		      if (next.authenticate && !Auth.isLoggedIn()) {
+		        $location.path('/login');
+		      }
+		    });
   	}]);

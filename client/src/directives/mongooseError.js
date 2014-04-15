@@ -1,10 +1,6 @@
 'use strict';
 
-angular.module('fullstackApp')
-
-  /**
-   * Removes server error when user updates input
-   */
+angular.module('schoolstore')
   .directive('mongooseError', function () {
     return {
       restrict: 'A',
@@ -14,5 +10,5 @@ angular.module('fullstackApp')
           return ngModel.$setValidity('mongoose', true);
         });
       }
-    }
+    };
   });

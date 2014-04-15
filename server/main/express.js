@@ -1,7 +1,6 @@
 'use strict';
 
 var express = require('express'),
-    path = require('path'),
     passport = require('passport'),
     mongoStore = require('connect-mongo')(express);
 
@@ -44,7 +43,7 @@ module.exports = function(app, config) {
         url: config.db.url,
         collection: 'sessions'
       }, function () {
-          console.log("db connection open");
+          console.log('db connection open');
       })
     }));
 

@@ -40,7 +40,7 @@ UserSchema
   .virtual('userInfo')
   .get(function() {
     return {
-      'id': this.id,
+      '_id': this._id,
       'username': this.username,
       'name': this.name,
     };
@@ -56,10 +56,6 @@ UserSchema
     };
   });
     
-/**
- * Validations
- */
-
 // Validate empty email
 UserSchema
   .path('email')
@@ -87,29 +83,29 @@ UserSchema
   .validate(function(value, respond) {
     var self = this;
     this.constructor.findOne({email: value}, function(err, user) {
-      if(err) throw err;
+      if(err) {throw err;}
       if(user) {
-        if(self.id === user.id) return respond(true);
+        if(self.id === user.id){return respond(true); }
         return respond(false);
       }
-      respond(true);
+      return respond(true);
     });
 }, 'The specified email address is already in use.');
 
-// Validate email is not taken
-/*UserSchema
+// Validate username is not taken
+UserSchema
   .path('username')
   .validate(function(value, respond) {
     var self = this;
     this.constructor.findOne({username: value}, function(err, user) {
-      if(err) throw err;
+      if(err) {throw err;}
       if(user) {
-        if(self.id === user.id) return respond(true);
+        if(self.id === user.id) {return respond(true);}
         return respond(false);
       }
-      respond(true);
+      return respond(true);
     });
-}, 'The specified username is already in use.');*/
+}, 'The specified username is already in use.');
 
 var validatePresenceOf = function(value) {
   return value && value.length;
@@ -120,12 +116,12 @@ var validatePresenceOf = function(value) {
  */
 UserSchema
   .pre('save', function(next) {
-    if (!this.isNew) return next();
+    if (!this.isNew) {return next();}
 
-    if (!validatePresenceOf(this.hashedPassword))
+    if (!validatePresenceOf(this.hashedPassword)){
       next(new Error('Invalid password'));
-    else
-      next();
+    }
+    else {next();}
   });
 
 /**
@@ -138,13 +134,13 @@ UserSchema.methods = {
   },
 
   makeSalt: function() {
-    return ((new Buffer("Anthony's salt Asdfg", 'base64'))   +
+    return ((new Buffer('Anthony\'s salt Asdfg', 'base64'))   +
             crypto.randomBytes(16).toString('base64') +
-            (new Buffer("Anthony's salt Hjkl1", 'base64')));
+            (new Buffer('Anthony\'s salt Hjkl1', 'base64')));
   },
 
   encryptPassword: function(password) {
-    if (!password || !this.salt) return '';
+    if (!password || !this.salt) {return '';}
     var salt = new Buffer(this.salt, 'base64');
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
   }
